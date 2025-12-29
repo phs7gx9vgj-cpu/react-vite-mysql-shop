@@ -1,0 +1,43 @@
+/* App.css */
+:root {
+  --primary-color: #0984e3;
+  --secondary-color: #6c5ce7;
+  --bg-color: #f5f6fa;
+  --text-color: #2f3640;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: 'Inter', -apple-system, sans-serif;
+  background-color: var(--bg-color);
+  color: var(--text-color);
+  line-height: 1.6;
+}
+
+.app-container {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+.main-content {
+  flex: 1; /* Đẩy footer xuống đáy */
+  width: 100%;
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 40px 20px;
+}
+
+.app-footer {
+  text-align: center;
+  padding: 20px;
+  background: white;
+  border-top: 1px solid #dcdde1;
+  color: #7f8c8d;
+  font-size: 14px;
+}
