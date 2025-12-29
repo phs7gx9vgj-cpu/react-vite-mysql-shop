@@ -1,28 +1,18 @@
-import { useEffect, useState } from "react"
+// XÓA import không sử dụng
+// import { useEffect, useState } from "react"
 import type { CartItem } from "../types/Product"
 import "./CartPage.css"
 
 interface Props {
-  cart: CartItem[]  // THÊM props này
-  onCheckout: () => void  // THÊM props này
+  cart: CartItem[]
+  onCheckout: () => void
 }
 
-export default function CartPage({ cart, onCheckout }: Props) {  // NHẬN props
-  // XÓA state local cart vì đã nhận từ props
-  // const [cart, setCart] = useState<CartItem[]>([])
-
-  // XÓA hàm loadCart vì không cần fetch API ở đây nữa
-  // const loadCart = () => {
-  //   fetch("http://localhost:3001/api/cart")
-  //     .then(res => res.json())
-  //     .then(setCart)
-  // }
-  // useEffect(loadCart, [])
-
+export default function CartPage({ cart, onCheckout }: Props) {
   // Tính tổng tiền của giỏ hàng
   const totalPrice = cart.reduce((sum, item) => sum + item.price * item.quantity, 0)
 
-  const checkout = async () => {
+  const handleCheckout = () => {
     const confirm = window.confirm("Bạn có chắc chắn muốn thanh toán?")
     if (!confirm) return
 
@@ -63,7 +53,7 @@ export default function CartPage({ cart, onCheckout }: Props) {  // NHẬN props
                 <span>Tổng thanh toán:</span>
                 <span className="total-price">{totalPrice.toLocaleString()} đ</span>
               </div>
-              <button className="checkout-btn" onClick={checkout}>
+              <button className="checkout-btn" onClick={handleCheckout}>
                 Thanh toán ngay
               </button>
             </div>
