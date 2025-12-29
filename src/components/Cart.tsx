@@ -1,4 +1,3 @@
-
 import type { CartItem } from "../types/Product"
 import './cart.css'    
 

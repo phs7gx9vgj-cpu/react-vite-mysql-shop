@@ -1,17 +1,23 @@
 import { useEffect, useState } from "react"
 import type { CartItem } from "../types/Product"
-import "./CartPage.css" // Import file CSS
+import "./CartPage.css"
 
-export default function CartPage() {
-  const [cart, setCart] = useState<CartItem[]>([])
+interface Props {
+  cart: CartItem[]  // THÊM props này
+  onCheckout: () => void  // THÊM props này
+}
 
-  const loadCart = () => {
-    fetch("http://localhost:3001/api/cart")
-      .then(res => res.json())
-      .then(setCart)
-  }
+export default function CartPage({ cart, onCheckout }: Props) {  // NHẬN props
+  // XÓA state local cart vì đã nhận từ props
+  // const [cart, setCart] = useState<CartItem[]>([])
 
-  useEffect(loadCart, [])
+  // XÓA hàm loadCart vì không cần fetch API ở đây nữa
+  // const loadCart = () => {
+  //   fetch("http://localhost:3001/api/cart")
+  //     .then(res => res.json())
+  //     .then(setCart)
+  // }
+  // useEffect(loadCart, [])
 
   // Tính tổng tiền của giỏ hàng
   const totalPrice = cart.reduce((sum, item) => sum + item.price * item.quantity, 0)
@@ -20,9 +26,8 @@ export default function CartPage() {
     const confirm = window.confirm("Bạn có chắc chắn muốn thanh toán?")
     if (!confirm) return
 
-    await fetch("http://localhost:3001/api/cart", { method: "DELETE" })
-    alert("Thanh toán thành công!")
-    loadCart()
+    // Gọi hàm onCheckout từ props
+    onCheckout()
   }
 
   return (

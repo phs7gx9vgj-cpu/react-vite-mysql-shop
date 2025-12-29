@@ -2,7 +2,7 @@ export interface Product {
   id: number
   name: string
   price: number
-  image?: string  // <-- Thêm dòng này, dùng optional (?) cho an toàn
+  image?: string
 }
 
 export interface CartItem extends Product {

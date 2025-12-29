@@ -22,32 +22,46 @@ export default function App() {
     })
   }
 
-const checkout = async () => {
-  const total = cart.reduce(
-    (sum, i) => sum + i.price * i.quantity,
-    0
-  )
-  await fetch("http://localhost:3001/api/checkout", {
-    method: "POST",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({ cart, total })
-  })
+  const checkout = async () => {
+    const total = cart.reduce(
+      (sum, i) => sum + i.price * i.quantity,
+      0
+    )
+    
+    try {
+      await fetch("http://localhost:3001/api/checkout", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ cart, total })
+      })
 
-  alert("Thanh toán thành công")
-  setCart([])
-}
+      alert("Thanh toán thành công")
+      setCart([])
+    } catch (error) {
+      console.error("Checkout error:", error)
+      alert("Có lỗi xảy ra khi thanh toán")
+    }
+  }
+
   return (
     <div style={{ padding: 20 }}>
       <h1>🛒 Shop Basic</h1>
    
-
-     <BrowserRouter>
+      <BrowserRouter>
         <Navbar />
-      <Routes>
-        <Route path="/" element={<Home addToCart={addToCart} />} />
-        <Route path="/cart" element={<CartPage cart={cart} onCheckout={checkout} />} />
-      </Routes>
-     </BrowserRouter>
+        <Routes>
+          <Route path="/" element={<Home addToCart={addToCart} />} />
+          <Route 
+            path="/cart" 
+            element={
+              <CartPage 
+                cart={cart} 
+                onCheckout={checkout} 
+              />
+            } 
+          />
+        </Routes>
+      </BrowserRouter>
     </div>
   )
 }

@@ -7,9 +7,9 @@ interface Props {
 }
 
 export default function ProductList({ products, onAddToCart }: Props) {
-  // Danh sách các ảnh dự phòng
+  // Danh sách các ảnh dự phòng (ĐÃ SỬA URL)
   const PLACEHOLDER_IMAGES = [
-    "htthttps://city89.com/wp-content/uploads/2023/10/TT-0015-black-back-copy.jpg",
+    "https://via.placeholder.com/300x300?text=Product+Image",
     "https://city89.com/wp-content/uploads/2023/10/TT-0015-black-back-copy.jpg",
     "https://product.hstatic.net/1000402464/product/jn25ss09p-rg_jean__4__20ee1b6fb9a9466fab51326e6497caa3_master.jpg",
     "https://product.hstatic.net/200000126299/product/z5731188687196_a912b490066d450f58b9a1f92cfe8d2c_ddfa0309c84846db9a48b1e323237168_master.jpg"
@@ -19,7 +19,7 @@ export default function ProductList({ products, onAddToCart }: Props) {
     <div className="container">
       <div className="product-list">
         {products.map((p) => {
-          // Lấy 1 ảnh từ mảng dựa trên ID (ví dụ: ID 1 lấy ảnh index 1, ID 5 lấy lại index 1)
+          // Lấy 1 ảnh từ mảng dựa trên ID
           const fallbackIdx = p.id % PLACEHOLDER_IMAGES.length;
           const fallbackUrl = PLACEHOLDER_IMAGES[fallbackIdx];
 
